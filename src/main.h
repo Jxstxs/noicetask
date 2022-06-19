@@ -20,19 +20,24 @@ enum FUNCS {
 };
 
 typedef struct {
-    char *path;
     char *title;
     char *description;
-    char *mod;
+    char *path;
+    char *expireDate;
+    char *categories;
+    char *field;
     char *newValue;
-    bool done;
+    char *type;
     int *ids;
+    int priority;
+    int marked;
 } funcParams;
 
 typedef struct {
     funcParams fp;
     char *databasePath;
     sqlite3 *db;
+    int noConfirm;
     int err;
     int func;
 } todoConf;
