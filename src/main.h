@@ -7,6 +7,7 @@ enum ERRS {
     OK,
     NO_DB_PATH,
     NO_FUNC_GIVEN,
+    PARAM,
     HELP
 };
 
@@ -28,9 +29,9 @@ typedef struct {
     char *field;
     char *newValue;
     char *type;
-    int *ids;
-    int priority;
-    int marked;
+    char *ids;
+    char *priority;
+    char *marked;
 } funcParams;
 
 typedef struct {
