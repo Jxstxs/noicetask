@@ -10,7 +10,7 @@
 
 void usage() {
     printf(
-    "Usage: todo [ARGUMENTS] <function> [PARAMETERS]\n"
+    "Usage: nt [ARGUMENTS] <function> [PARAMETERS]\n"
     );
 }
 
@@ -23,8 +23,7 @@ int main(int argc, char **argv) {
     }
 
     // Arg parsing
-    todoConf tc;
-    tc = parseArguments(argc, argv);
+    todoConf tc = parseArguments(argc, argv);
 
     // Error and Help handling
     if (tc.err != OK) {
@@ -32,18 +31,16 @@ int main(int argc, char **argv) {
             case NO_DB_PATH:
                 printf("No Database given\n");
                 printf("If you want to use the Database from current or Home Directory dont use 'db' or 'database'\n");
-                usage();
                 break;
 
-            case HELP:
-                usage();
-                break;
-            
             case NO_FUNC_GIVEN:
                 printf("No Function given\n");
-                usage();
                 break;
+
+            case PARAM:
+                printf("Something went wrong with the Paramter for the Function: %d\n", tc.func);
         }
+        usage();
         return 1;
     }
 
