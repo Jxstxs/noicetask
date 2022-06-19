@@ -10,21 +10,7 @@
 
 void usage() {
     printf(
-    "Usage: todo [ARGUMENTS] <function> [PARAMETERS]"
-    // ARGUMENTS
-    // DATABASE HELP
-    "\n\t-db <path> or --database <path> to specify which Todo Database should be used, if its not found it would create a new one in the given Path."
-    "\n\t\tDefaults: it first looks in the current working Directory and then into the $HOME Directory."
-    // HELP HELP
-    "\n\t-h <function> or --help <function> prints this or a specific Help text for a Function"
-    "\n\t\tDefaults: it prints all Help texts"
-
-    // FUNCTIONS
-    // ADD HELP
-    "\n\n\tadd:"
-    "\n\t\t-t 'TITLE' or --title 'TITLE' specify the Title of the Todo. The Title is always needed."
-    "\n\t\t-d 'DESCRIPTION' or --description 'DESCRIPTION' specify the Description for the Todo. The Description is optional."
-    "\n\t\tWeiter Machen !!!!!!!!!!!!!!!!!"
+    "Usage: todo [ARGUMENTS] <function> [PARAMETERS]\n"
     );
 }
 
@@ -61,27 +47,20 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    setupTConf(&tc);
-
-    printf("%s\n", tc.databasePath);
-
-    char *errMsg = 0;
-    sqlite3_exec(tc.db, "SELECT * FROM todos;", callback, 0, &errMsg);
-
     switch (tc.func) {
-        case ADD:
+        case ADD_TODO:
             printf("adding a todo\n");
             break;
-        case DONE:
+        case DONE_TODO:
             printf("done a todo\n");
             break;
-        case MOD:
+        case MOD_TODO:
             printf("mod a todo\n");
             break;
-        case REMOVE:
+        case REMOVE_TODO:
             printf("remove a todo\n");
             break;
-        case PRINT:
+        case LIST:
             printf("list todos\n");
             break;
     }
