@@ -1,0 +1,55 @@
+# NOICETASK
+
+## The todo
+
+The todo has a Title, a Description, a Path, a Date when it was created, a Expire Date when it should be done, a Category, a Priority (from 1-3)
+
+## Categories
+
+It has a Title, maybe a Description (what it is for) and maybe a default Priority
+
+## Priority
+
+It goes from one to three, or from Low to Mid to High
+
+## Functions
+
+```
+#define FNCARG(x, y, z) ((strcmp(argv[i], x) == 0 || strcmp(argv[i], y) == 0) && _tc.func == z)
+```
+
+- [ ]  add Todos: Adds an Todo with the given Options to the Database
+    * -t/--title: the Title for the Todo (needed) => takes one String (maybe 90 Chars)
+    * -d/--descripton: the Description body of the Todo (optional) => takes a String (no limitation)
+    * -pa/--path: the Path or File a todo is "linked" to (optional) => takes a String (gets checked)
+    * -ex/--expire: the Date to when it needs to be done (optional) => takes a string (get converted to a timestamp)
+    * -ca/--category: the Categories the Todo belongs to (optional) => takes one String (gets checked, if not found create it??)
+    * -pr/--priority: the Priority for the Todo (optional -> default: 1) => takes a Int (1-3)
+
+- [ ]  done Todos: toggles the Done Status of a Todo
+    * -id: the id of the todo, which will be marked as done (needed) => takes one to n arguments (int)
+    * (-ch/--choose: opens fzf with all todos which are not done => takes no arguments)
+
+- [ ] mod Todos: modifies a Todo with the given Option and New Value
+    * -id: the id of the Todo, which will be modified (needed) => takes one (to n) argument (int)
+    * -f/--field: the Option, which will be changed (needed) => takes one String
+    * -nv/--newvalue: the New Value, which will be set for Option in Todo (needed) => takes one String (maybe need splitting for this, see categories)
+
+- [ ] remove Todos: removes a Todo from the Database
+    * -id: the id of the Todo, which will be removed (needed) => takes one to n arguments (int)
+
+- [ ] list: prints the given Database Table to screen in a Table (Todos, Categoires, Paths) => default is Todos
+    * -t/--type: set the type of the output (optional -> default: todos) => takes a string (todo, category, path)
+    * (maybe implementing search function -sf and -sv (searchfiled and value))
+
+- [ ] add Category: adds an Category to the Database
+    * -t/--title: the Title, which will get Displayed (needed) => takes a String (maybe max 40)
+    * -d/--descripton: the Description for the Category (optional) => takes a String (no limitation)
+
+- [ ] mod Category: modifies the given Category with the given Fileds and Values
+    * -id: the id of the Category, which will be modified (needed) => takes one Int
+    * -f/--field: the field, which will get changed (needed) => takes a string
+    * -nv/--newvalue: the new value, which will be set for Field in Category (needed) => takes a string
+
+- [ ] remove Category: removes a Category from the Database (maybe need to remove links in the todo database)
+    * -id: the id of the Category, which gets removed (needed) => takes a int
