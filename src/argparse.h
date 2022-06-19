@@ -1,6 +1,6 @@
 #ifndef ARGPARSE_H
 
-#define ARGCMP(a, b) (strcmp(argv[i], (a)) == 0 || strcmp(argv[i], (b)) == 0)
+#define ARGCMP(x, y, z) ((strcmp(argv[i], x) == 0 || strcmp(argv[i], y) == 0) && _tc.func == z)
 
 todoConf parseArguments(int argc, char** argv);
 
