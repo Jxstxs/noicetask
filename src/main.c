@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
 
     switch (tc.func) {
         case ADD_TODO:
-            printf("adding a todo\n");
+            printf("adding a todo\n%s\n", tc.fp.title);
             break;
         case DONE_TODO:
             printf("done a todo\n");
