@@ -31,7 +31,7 @@ typedef struct {
     char *type;
     char *ids;
     char *priority;
-    char *marked;
+    bool marked;
 } funcParams;
 
 typedef struct {

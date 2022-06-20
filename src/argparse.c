@@ -65,6 +65,14 @@ todoConf parseArguments(int argc, char** argv){
 
         // DONE
         else if (ARGCMP("-id", "-id", DONE_TODO)) {CHECKNEXT(ids, PARAM)}
+
+        // MOD
+        else if (ARGCMP("-f", "--field", MOD_TODO)) {CHECKNEXT(field, PARAM)}
+        else if (ARGCMP("-nv", "--newvalue", MOD_TODO)) {CHECKNEXT(newValue, PARAM)}
+
+        // REMOVE
+        else if (ARGCMP("-m", "--marked", REMOVE_TODO)) {_tc.fp.marked = True;}
+
     }
 
     if (_tc.func == NONE) _tc.err = NO_FUNC_GIVEN;
