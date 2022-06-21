@@ -12,6 +12,7 @@ todoConf parseArguments(int argc, char** argv){
     // setting defaults
     _tc.err = OK;
     _tc.func = NONE;
+    _tc.noConfirm = 0;
 
     int skip = 0; // skip indicator
 
@@ -42,10 +43,8 @@ todoConf parseArguments(int argc, char** argv){
             _tc.err = HELP;
             return _tc;
         }
-//      // CREATE ARG
-//      else if (ARGCMP("-cr", "--create") && _tc.func == NONE) {
-//          // HERE 
-//      }
+        // NO CONFIRM ARG
+        else if (ARGCMP("-nc", "--noconfirm", NONE)) {_tc.noConfirm = 1;}
 
         // FUNCTIONS
         else if (ARGCMP("a", "add", NONE)) _tc.func = ADD_TODO;
@@ -55,24 +54,26 @@ todoConf parseArguments(int argc, char** argv){
         else if (ARGCMP("p", "print", NONE)) _tc.func = LIST;
         
         // FUNCTION PARAMETERS
-        // ADD
-        else if (ARGCMP("-t", "--title", ADD_TODO))         {CHECKNEXT(title, PARAM)}
-        else if (ARGCMP("-d", "--description", ADD_TODO))   {CHECKNEXT(description, PARAM)}
-        else if (ARGCMP("-pa", "--path", ADD_TODO))         {CHECKNEXT(title, PARAM)}
-        else if (ARGCMP("-ex", "--expire", ADD_TODO))       {CHECKNEXT(title, PARAM)}
-        else if (ARGCMP("-ca", "--category", ADD_TODO))     {CHECKNEXT(title, PARAM)}
-        else if (ARGCMP("-pr", "--priority", ADD_TODO))     {CHECKNEXT(title, PARAM)}
+        // FOR MULTIPLE FUNCTIONS
+        else if (ARGCMP("-id", "-id", ANY)) {CHECKNEXT(ids, PARAM)}
+        else if (ARGCMP("-t", "--title", ANY)) {CHECKNEXT(title, PARAM)}
+        else if (ARGCMP("-d", "--description", ANY)) {CHECKNEXT(description, PARAM)}
 
-        // DONE
-        else if (ARGCMP("-id", "-id", DONE_TODO)) {CHECKNEXT(ids, PARAM)}
+        // ADD
+        else if (ARGCMP("-pa", "--path", ADD_TODO)) {CHECKNEXT(path, PARAM)}
+        else if (ARGCMP("-ex", "--expire", ADD_TODO)) {CHECKNEXT(expireDate, PARAM)}
+        else if (ARGCMP("-ca", "--category", ADD_TODO)) {CHECKNEXT(categories, PARAM)}
+        else if (ARGCMP("-pr", "--priority", ADD_TODO)) {CHECKNEXT(priority, PARAM)}
 
         // MOD
         else if (ARGCMP("-f", "--field", MOD_TODO)) {CHECKNEXT(field, PARAM)}
         else if (ARGCMP("-nv", "--newvalue", MOD_TODO)) {CHECKNEXT(newValue, PARAM)}
 
         // REMOVE
-        else if (ARGCMP("-m", "--marked", REMOVE_TODO)) {_tc.fp.marked = True;}
+        else if (ARGCMP("-m", "--marked", REMOVE_TODO)) {_tc.fp.marked = true;}
 
+        // LIST
+        else if (ARGCMP("-t", "--type", LIST)) {CHECKNEXT(type, PARAM)}
     }
 
     if (_tc.func == NONE) _tc.err = NO_FUNC_GIVEN;
