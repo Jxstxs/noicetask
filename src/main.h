@@ -1,4 +1,5 @@
 #ifndef MAIN_H
+#define MAIN_H
 
 #include <sqlite3.h>
 #include <stdbool.h>
@@ -17,6 +18,7 @@ enum FUNCS {
     REMOVE_TODO,
     DONE_TODO,
     LIST,
+    ANY,
     NONE
 };
 
