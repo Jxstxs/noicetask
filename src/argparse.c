@@ -2,17 +2,35 @@
 #include <sqlite3.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "main.h"
 #include "argparse.h"
+
+void initTodoConf(todoConf *tc) {
+    tc->databasePath = "";
+    tc->noConfirm = 0;
+    tc->err = OK;
+    tc->func = NONE;
+
+    tc->fp.title = "";
+    tc->fp.description = "";
+    tc->fp.path = "";
+    tc->fp.expireDate = "";
+    tc->fp.categories = "";
+    tc->fp.field = "";
+    tc->fp.newValue = "";
+    tc->fp.type = "";
+    tc->fp.ids = "";
+    tc->fp.priority = "";
+    tc->fp.marked = false;
+}
 
 todoConf parseArguments(int argc, char** argv){
     todoConf _tc;
 
     // setting defaults
-    _tc.err = OK;
-    _tc.func = NONE;
-    _tc.noConfirm = 0;
+    initTodoConf(&_tc);
 
     int skip = 0; // skip indicator
 
@@ -51,7 +69,7 @@ todoConf parseArguments(int argc, char** argv){
         else if (ARGCMP("d", "done", NONE)) _tc.func = DONE_TODO;
         else if (ARGCMP("r", "remove", NONE)) _tc.func = REMOVE_TODO;
         else if (ARGCMP("m", "modify", NONE)) _tc.func = MOD_TODO;
-        else if (ARGCMP("p", "print", NONE)) _tc.func = LIST;
+        else if (ARGCMP("l", "list", NONE)) _tc.func = LIST;
         
         // FUNCTION PARAMETERS
         // FOR MULTIPLE FUNCTIONS
@@ -73,7 +91,7 @@ todoConf parseArguments(int argc, char** argv){
         else if (ARGCMP("-m", "--marked", REMOVE_TODO)) {_tc.fp.marked = true;}
 
         // LIST
-        else if (ARGCMP("-t", "--type", LIST)) {CHECKNEXT(type, PARAM)}
+        else if (ARGCMP("--type", "--type", LIST)) {CHECKNEXT(type, PARAM)}
     }
 
     if (_tc.func == NONE) _tc.err = NO_FUNC_GIVEN;
