@@ -14,10 +14,6 @@ It goes from one to three, or from Low to Mid to High
 
 ## Functions
 
-```
-#define FNCARG(x, y, z) ((strcmp(argv[i], x) == 0 || strcmp(argv[i], y) == 0) && _tc.func == z)
-```
-
 - [ ]  add Todos: Adds an Todo with the given Options to the Database
     * -t/--title: the Title for the Todo (needed) => takes one String (maybe 90 Chars)
     * -d/--descripton: the Description body of the Todo (optional) => takes a String (no limitation)
@@ -36,7 +32,9 @@ It goes from one to three, or from Low to Mid to High
     * -nv/--newvalue: the New Value, which will be set for Option in Todo (needed) => takes one String (maybe need splitting for this, see categories)
 
 - [ ] remove Todos: removes a Todo from the Database
-    * -id: the id of the Todo, which will be removed (needed) => takes one to n arguments (int)
+    * -id: the id of the Todo, which will be removed (optional) => takes one to n arguments (int)
+    * -m/--marked: removes all Todos, which are marked as Done (optional) => takes no arguments
+    * => one of them is needed!
 
 - [ ] list: prints the given Database Table to screen in a Table (Todos, Categoires, Paths) => default is Todos
     * -t/--type: set the type of the output (optional -> default: todos) => takes a string (todo, category, path)
