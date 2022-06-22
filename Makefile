@@ -27,12 +27,6 @@ $(BIN): $(OBJS) bindir
 debug: $(OBJS) bindir
 	$(CC) $(DEBUG) $(CFLAGS) $(OBJS) $(CLIBS) -o $(BINDIR)/debug
 
-test: tests/test.o
-	$(CC) $(CFLAGS) tests/test.o -o $(BINDIR)/test
-
-test.o: tests/test.c objsdir
-	$(CC) $(CFLAGS) -c tests/test.c -o test/test.o
-
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h objsdir
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -44,3 +38,11 @@ install: $(TARGET)
 
 run: $(BIN)
 	./$(BINDIR)/$(BIN)
+
+
+# TESTS
+
+test-argparse: tests/argparse-test.c src/argparse.c tests/printConf.c
+	$(CC) $(CFLAGS) tests/argparse-test.c src/argparse.c tests/printConf.c -o $(BINDIR)/argparse-test
+
+tests: test-argparse
