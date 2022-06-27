@@ -42,6 +42,9 @@ run: $(BIN)
 
 # TESTS
 
+test: tests/test.c
+	$(CC) $(CFLAGS) tests/test.c -o $(BINDIR)/test
+
 test-argparse: tests/argparse-test.c src/argparse.c tests/printConf.c
 	$(CC) $(CFLAGS) tests/argparse-test.c src/argparse.c tests/printConf.c -o $(BINDIR)/argparse-test
 
