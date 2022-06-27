@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "argparse.h"
+#include "addtodo.h"
 
 void usage() {
     printf(
@@ -46,7 +47,7 @@ int main(int argc, char **argv) {
 
     switch (tc.func) {
         case ADD_TODO:
-            printf("adding a todo\n%s\n", tc.fp.title);
+            addTodo(&tc);
             break;
         case DONE_TODO:
             printf("done a todo\n");
