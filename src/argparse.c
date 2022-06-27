@@ -1,30 +1,13 @@
 
 #include <sqlite3.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
 #include "main.h"
 #include "argparse.h"
-
-void initTodoConf(todoConf *tc) {
-    tc->databasePath = "";
-    tc->noConfirm = 0;
-    tc->err = OK;
-    tc->func = NONE;
-
-    tc->fp.title = "";
-    tc->fp.description = "";
-    tc->fp.path = "";
-    tc->fp.expireDate = "";
-    tc->fp.categories = "";
-    tc->fp.field = "";
-    tc->fp.newValue = "";
-    tc->fp.type = "";
-    tc->fp.ids = "";
-    tc->fp.priority = "";
-    tc->fp.marked = false;
-}
+#include "additional.h"
 
 todoConf parseArguments(int argc, char** argv){
     todoConf _tc;
@@ -43,7 +26,7 @@ todoConf parseArguments(int argc, char** argv){
             skip = 0;
         }
         if (!argv[i]) break;
-
+        
         // ARGUMENTS
         // DATABASE ARG
         if (ARGCMP("-db", "--database", NONE)){
