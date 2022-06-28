@@ -48,4 +48,7 @@ test: tests/test.c
 test-argparse: tests/argparse-test.c src/argparse.c tests/printConf.c
 	$(CC) $(CFLAGS) tests/argparse-test.c src/argparse.c tests/printConf.c -o $(BINDIR)/argparse-test
 
+test-additional: tests/additional-tests.c src/additional.c src/argparse.c tests/printConf.c
+	$(CC) $(CFLAGS) tests/additional-tests.c src/additional.c src/argparse.c tests/printConf.c -o $(BINDIR)/additional-test
+
 tests: test-argparse
