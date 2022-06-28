@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "argparse.h"
+#include "database.h"
 
 void usage() {
     printf(
@@ -44,6 +45,10 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    // Initialize database
+    intitDatabase(&tc);
+
+    // Execute Function
     switch (tc.func) {
         case ADD_TODO:
             printf("adding a todo\n%s\n", tc.fp.title);
@@ -61,6 +66,9 @@ int main(int argc, char **argv) {
             printf("list todos\n");
             break;
     }
+
+    // Close database
+    closeDatabase(&tc);
 
     return 0;
 }
