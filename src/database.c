@@ -2,19 +2,26 @@
 #include <sqlite3.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 #include "database.h"
 
 void initDatabase(todoConf *tc) {
-    char *errmsg = 0;
-    int rc;
+    /*
+        NOTE: what it should do
+        - check if a database was given
+            - if yes -> try open it (check if exists and read/writeable)
+            - if no -> ask to create (if nc -> without asking)
+    */
 
-    rc = sqlite3_open(tc->databasePath, &tc->db);
-    if (rc != SQLITE_OK) {
-        fprintf(stderr, "ERROR: Can't open database: '%s' in initDatabase()\n", sqlite3_errmsg(tc->db));
-        sqlite3_close(tc->db);
-        exit(1);
+    // check if databasePath is given
+    if (strcmp(tc->databasePath, "") == 0) {
+
     }
 }
 
-void closeDatabase(todoConf *tc);
+void closeDatabase(todoConf *tc) {
+    // printf("closing database\n");
+    // sqlite3_close(tc->db);
+}
