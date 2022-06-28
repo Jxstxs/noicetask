@@ -59,20 +59,42 @@ time_t convertStringToDate(char *date) {
 }
 
 int *parseCategories(char *categories) {
-    printf("parseCategories() called\n");
-    int *result = malloc(sizeof(int) * MAX_CATEGORIES);
-    if (result == NULL) {
-        return NULL;
-    }
+    int *result = NULL; // malloc(sizeof(int));
+    // if (result == NULL) {
+    //     return NULL;
+    // }
     char *delim = ",";
-    char *token = strtok(categories, delim);
+
+    char buf[50];
+    strcpy(buf, categories);
+    char *token = strtok(buf, delim);
+
     int i = 0;
     while (token != NULL) {
-        printf("%s\n", token);
-        result[i] = atoi(token);
+        // reallocate result
+        int *_result = realloc(result, sizeof(int) * (i + 1));
+        if (_result == NULL) {
+            free(result);
+            return NULL;
+        }
+        result = _result;
+
+        int newResult = atoi(token);
+        // check if newResult is in already in result
+        for (int j = 0; j < i; j++) {
+            if (result[j] == newResult) {
+                newResult = 0;
+                break;
+            }
+        }
+        if (newResult != 0) {
+            result[i] = newResult;
+            i++;
+        } 
+
         token = strtok(NULL, delim);
-        i++;
     }
+    result[i] = 0;
     return result;
 }
 
