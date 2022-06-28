@@ -69,8 +69,15 @@ void addTodo(todoConf *tc) {
         priority = LOW;
     }
 
-    // frees allocated vars
-    // free(tc->fp.path);
+    /* 
+        NOTE: here we are
+        Need to be done:
+            - check if path is already in database if not add it
+            - check if expireDate is valid (maybe inside of convertStringToDate())
+            - check if categories are valid (maybe inside of parseCategories())
+                - if not valid, print error message and return or create the categories
+            - add data to database
+    */
 
     // check if categories are given
     if (categories != NULL) {
