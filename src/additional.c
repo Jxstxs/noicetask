@@ -99,7 +99,6 @@ int *parseCategories(char *categories) {
 }
 
 int parsePriority(char *priority) {
-    printf("parsePriority() called\n");
     if ((strcmp(priority, "low") == 0) || (strcmp(priority, "l") == 0)) {
         return LOW;
     } else if ((strcmp(priority, "medium") == 0) || (strcmp(priority, "m") == 0)) {
