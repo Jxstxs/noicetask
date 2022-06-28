@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     }
 
     // Initialize database
-    intitDatabase(&tc);
+    initDatabase(&tc);
 
     // Execute Function
     switch (tc.func) {

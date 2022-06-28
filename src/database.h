@@ -3,7 +3,9 @@
 
 #include "main.h"
 
-void intitDatabase(todoConf *tc);
+#define DATABASENAME "database.db"
+
+void initDatabase(todoConf *tc);
 void closeDatabase(todoConf *tc);
 
 #endif // !DATABASE_H
