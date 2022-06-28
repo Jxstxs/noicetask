@@ -34,11 +34,11 @@ void addTodo(todoConf *tc) {
         }
     }
 
-    // check if an expire date is given
+    // check if an expireDate is given
     time_t expireDate = 0;
     if (strcmp(tc->fp.expireDate, "") != 0) {
         // convert a string date to a time_t
-        time_t expireDate = convertStringToDate(tc->fp.expireDate);
+        expireDate = convertStringToDate(tc->fp.expireDate);
         if (expireDate == -1) {
             printf("Error: addTodo() could not convert given date to time_t struct\n");
             return;
@@ -49,7 +49,7 @@ void addTodo(todoConf *tc) {
     int *categories = NULL;
     if (strcmp(tc->fp.categories, "") != 0) {
         // convert a string categories to an int array
-        int *categories = parseCategories(tc->fp.categories);
+        categories = parseCategories(tc->fp.categories);
         if (categories == NULL) {
             printf("Error: addTodo() could not parse given categories\n");
             return;
@@ -60,7 +60,7 @@ void addTodo(todoConf *tc) {
     int priority = 0;
     if (strcmp(tc->fp.priority, "") != 0) {
         // convert a string priority to an int
-        int priority = parsePriority(tc->fp.priority);
+        priority = parsePriority(tc->fp.priority);
         if (priority == -1) {
             printf("Error: addTodo() could not parse given priority\n");
             return;
@@ -69,39 +69,15 @@ void addTodo(todoConf *tc) {
         priority = LOW;
     }
 
-    // print all function parameters
-    printf("Title: %s\n", tc->fp.title);
-    printf("Description: %s\n", tc->fp.description);
-    printf("Path: %s\n", tc->fp.path);
-    printf("Expire Date: %s\n", tc->fp.expireDate);
-    printf("Categories: %s\n", tc->fp.categories);
-    printf("Priority: %s\n", tc->fp.priority);
-    printf("\n");
-
-    // print all information todoConf
-    printf("Title: %s\n", tc->fp.title);
-    printf("Description: %s\n", tc->fp.description);
-    printf("Path: %s\n", tc->fp.path);
-    printf("Expire Date: %s", asctime(localtime(&expireDate)));
-    printf("Categories: ");
-    // check if categories is not NULL
-    if (categories != NULL) {
-        for (int i = 0; i < MAX_CATEGORIES; i++) {
-            if (categories[i]) {
-                printf("%d ", categories[i]);
-            }
-        }
-    }
-    printf("\n");
-    printf("Priority: %d\n", priority);
-    printf("\n");
-
-
     // frees allocated vars
     // free(tc->fp.path);
 
     // check if categories are given
     if (categories != NULL) {
+        // free all items of categories
+        for (int i = 0; categories[i]; i++) {
+            free(&categories[i]);
+        }
         free(categories);
     }
 }
