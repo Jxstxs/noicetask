@@ -55,3 +55,6 @@ Format: "YYYY/MM/DD/HH/MM", where the last MM is for minute and is optional and 
 
 - [ ] remove Category: removes a Category from the Database (maybe need to remove links in the todo database)
     * -id: the id of the Category, which gets removed (needed) => takes a int
+
+- [ ] go to Todo path/open file in $EDITOR
+    * -id: the id of the Todo to open the path
