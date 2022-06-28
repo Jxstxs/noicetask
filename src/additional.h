@@ -5,8 +5,6 @@
 
 #include "main.h"
 
-#define MAX_CATEGORIES 15
-
 void initTodoConf(todoConf *tc);
 time_t convertStringToDate(char *date);
 int *parseCategories(char *categories);
