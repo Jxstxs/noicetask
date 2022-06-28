@@ -27,10 +27,13 @@ void initTodoConf(todoConf *tc) {
 }
 
 time_t convertStringToDate(char *date) {
-    printf("convertStringToDate() called\n");
     struct tm tm;
     char *delim = "/";
-    char *token = strtok(date, delim);
+
+    char buf[17];
+    strcpy(buf, date);
+    char *token = strtok(buf, delim);
+
     int i = 0;
     while (token != NULL) {
         if (i == 0) {
