@@ -14,8 +14,6 @@ This project is currently under active development in an very early state, so do
 
 ## Installation
 
-> NOTE: maybe also Win idk?
-
 You need a Unix Based system with the base-devel package(name in arch).
 To Compile it, simply run `make` in your Terminal and run it with `./bin/nt <..args..>`.
 When you want to install it, run `sudo make install` and `make clean` to keep the Sourcetree pretty (or combined `sudo make install clean`).
