@@ -7,5 +7,6 @@
 
 void initDatabase(todoConf *tc);
 void closeDatabase(todoConf *tc);
+void createTables(todoConf *tc);
 
 #endif // !DATABASE_H
