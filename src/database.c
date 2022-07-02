@@ -14,7 +14,6 @@ void initDatabase(todoConf *tc) {
 
     // check if databasePath is given
     if (strcmp(tc->databasePath, "") == 0) {
-        printf("No database path given.\n");
         char upperPWD[512];
         sprintf(upperPWD, "%s/..", getenv("PWD"));
 
@@ -37,31 +36,54 @@ void initDatabase(todoConf *tc) {
             i++;
         }
 
-        // if database was found
+        // if database was not found
         if (rc == -1) {
+
             // loop through paths and ask to create database
             i = 0;
             while (paths[i] != NULL) {
-                printf("Database not found at %s\n", paths[i]);
-                printf("Do you want to create it? (y/n) ");
+                printf("Create database in %s? (y/n) ", paths[i]);
+
+                // get input and check if it is yes
                 scanf("%s", answer);
                 if (strcmp(answer, "y") == 0) {
                     sprintf(path, "%s/%s", paths[i], DATABASENAME);
-                    printf("Creating database at %s\n", path);
+                    // printf("Creating database at %s\n", path);
+
+                    // Create database
                     rc = sqlite3_open(path, &tc->db);
                     if (rc) {
                         printf("Can't open database: %s\n", sqlite3_errmsg(tc->db));
                         sqlite3_close(tc->db);
                         exit(1);
                     }
+                    // Create Tables
                     createTables(tc);
                     break;
                 }
                 printf("\n");
                 i++;
             }
-        }
+        } else {
 
+            // if database was found, open it
+            sprintf(path, "%s/%s", paths[rc], DATABASENAME);
+            // printf("Database found at %s\n", path);
+            rc = sqlite3_open(path, &tc->db);
+            if (rc) {
+                printf("Can't open database: %s\n", sqlite3_errmsg(tc->db));
+                sqlite3_close(tc->db);
+                exit(1);
+            }
+        }
+    } else {
+        // if databasePath is given, open it
+        rc = sqlite3_open(tc->databasePath, &tc->db);
+        if (rc) {
+            printf("Can't open database: %s\n", sqlite3_errmsg(tc->db));
+            sqlite3_close(tc->db);
+            exit(1);
+        }
     }
 }
 
