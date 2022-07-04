@@ -7,6 +7,5 @@
 #define CHECKNEXT(x, y) if (argv[i+1]) { _tc.fp.x = argv[i+1]; skip = 1; } else { _tc.err = y; return _tc; }
 
 taskConf parseArguments(int argc, char** argv);
-void initTaskConf(taskConf *tc);
 
 #endif // ARGPARSE_H
