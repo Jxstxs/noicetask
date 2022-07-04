@@ -9,25 +9,6 @@
 #include "argparse.h"
 #include "additional.h"
 
-void initTaskConf(taskConf *tc) {
-    tc->databasePath = "";
-    tc->noConfirm = 0;
-    tc->err = OK;
-    tc->func = NONE;
-
-    tc->fp.title = "";
-    tc->fp.description = "";
-    tc->fp.path = "";
-    tc->fp.expireDate = "";
-    tc->fp.categories = "";
-    tc->fp.field = "";
-    tc->fp.newValue = "";
-    tc->fp.type = "";
-    tc->fp.ids = "";
-    tc->fp.priority = "";
-    tc->fp.marked = false;
-}
-
 taskConf parseArguments(int argc, char** argv){
     taskConf _tc;
 
