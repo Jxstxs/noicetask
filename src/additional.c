@@ -7,7 +7,7 @@
 #include "main.h"
 #include "additional.h"
 
-void initTodoConf(todoConf *tc) {
+void initTaskConf(taskConf *tc) {
     tc->databasePath = "";
     tc->noConfirm = 0;
     tc->err = OK;

@@ -5,7 +5,7 @@
 
 #include "main.h"
 
-void initTodoConf(todoConf *tc);
+void initTaskConf(taskConf *tc);
 time_t convertStringToDate(char *date);
 int *parseCategories(char *categories);
 int parsePriority(char *priority);
