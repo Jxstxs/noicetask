@@ -54,6 +54,7 @@ int main(int argc, char **argv) {
         case ADD_TASK:
             addTask(&tc);
             printResults(&tc, "SELECT * FROM task");
+            // when finished with add task delete repo and redo it with proper names and all
             break;
         case DONE_TASK:
             printf("done a todo\n");
