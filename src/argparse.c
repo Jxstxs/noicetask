@@ -7,7 +7,7 @@
 #include "main.h"
 #include "argparse.h"
 
-void initTodoConf(todoConf *tc) {
+void initTaskConf(taskConf *tc) {
     tc->databasePath = "";
     tc->noConfirm = 0;
     tc->err = OK;
@@ -26,11 +26,11 @@ void initTodoConf(todoConf *tc) {
     tc->fp.marked = false;
 }
 
-todoConf parseArguments(int argc, char** argv){
-    todoConf _tc;
+taskConf parseArguments(int argc, char** argv){
+    taskConf _tc;
 
     // setting defaults
-    initTodoConf(&_tc);
+    initTaskConf(&_tc);
 
     int skip = 0; // skip indicator
 
@@ -65,10 +65,10 @@ todoConf parseArguments(int argc, char** argv){
         else if (ARGCMP("-nc", "--noconfirm", NONE)) {_tc.noConfirm = 1;}
 
         // FUNCTIONS
-        else if (ARGCMP("a", "add", NONE)) _tc.func = ADD_TODO;
-        else if (ARGCMP("d", "done", NONE)) _tc.func = DONE_TODO;
-        else if (ARGCMP("r", "remove", NONE)) _tc.func = REMOVE_TODO;
-        else if (ARGCMP("m", "modify", NONE)) _tc.func = MOD_TODO;
+        else if (ARGCMP("a", "add", NONE)) _tc.func = ADD_TASK;
+        else if (ARGCMP("d", "done", NONE)) _tc.func = DONE_TASK;
+        else if (ARGCMP("r", "remove", NONE)) _tc.func = REMOVE_TASK;
+        else if (ARGCMP("m", "modify", NONE)) _tc.func = MOD_TASK;
         else if (ARGCMP("l", "list", NONE)) _tc.func = LIST;
         
         // FUNCTION PARAMETERS
@@ -78,17 +78,17 @@ todoConf parseArguments(int argc, char** argv){
         else if (ARGCMP("-d", "--description", ANY)) {CHECKNEXT(description, PARAM)}
 
         // ADD
-        else if (ARGCMP("-pa", "--path", ADD_TODO)) {CHECKNEXT(path, PARAM)}
-        else if (ARGCMP("-ex", "--expire", ADD_TODO)) {CHECKNEXT(expireDate, PARAM)}
-        else if (ARGCMP("-ca", "--category", ADD_TODO)) {CHECKNEXT(categories, PARAM)}
-        else if (ARGCMP("-pr", "--priority", ADD_TODO)) {CHECKNEXT(priority, PARAM)}
+        else if (ARGCMP("-pa", "--path", ADD_TASK)) {CHECKNEXT(path, PARAM)}
+        else if (ARGCMP("-ex", "--expire", ADD_TASK)) {CHECKNEXT(expireDate, PARAM)}
+        else if (ARGCMP("-ca", "--category", ADD_TASK)) {CHECKNEXT(categories, PARAM)}
+        else if (ARGCMP("-pr", "--priority", ADD_TASK)) {CHECKNEXT(priority, PARAM)}
 
         // MOD
-        else if (ARGCMP("-f", "--field", MOD_TODO)) {CHECKNEXT(field, PARAM)}
-        else if (ARGCMP("-nv", "--newvalue", MOD_TODO)) {CHECKNEXT(newValue, PARAM)}
+        else if (ARGCMP("-f", "--field", MOD_TASK)) {CHECKNEXT(field, PARAM)}
+        else if (ARGCMP("-nv", "--newvalue", MOD_TASK)) {CHECKNEXT(newValue, PARAM)}
 
         // REMOVE
-        else if (ARGCMP("-m", "--marked", REMOVE_TODO)) {_tc.fp.marked = true;}
+        else if (ARGCMP("-m", "--marked", REMOVE_TASK)) {_tc.fp.marked = true;}
 
         // LIST
         else if (ARGCMP("--type", "--type", LIST)) {CHECKNEXT(type, PARAM)}

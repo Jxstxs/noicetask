@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "argparse.h"
+#include "database.h"
 
 void usage() {
     printf(
@@ -23,7 +24,7 @@ int main(int argc, char **argv) {
     }
 
     // Arg parsing
-    todoConf tc = parseArguments(argc, argv);
+    taskConf tc = parseArguments(argc, argv);
 
     // Error and Help handling
     if (tc.err != OK) {
@@ -44,23 +45,31 @@ int main(int argc, char **argv) {
         return 1;
     }
 
+    // Initialize database
+    initDatabase(&tc);
+
+    // Execute Function
     switch (tc.func) {
-        case ADD_TODO:
+        case ADD_TASK:
             printf("adding a todo\n%s\n", tc.fp.title);
+            printResults(&tc, "SELECT * FROM task");
             break;
-        case DONE_TODO:
+        case DONE_TASK:
             printf("done a todo\n");
             break;
-        case MOD_TODO:
+        case MOD_TASK:
             printf("mod a todo\n");
             break;
-        case REMOVE_TODO:
+        case REMOVE_TASK:
             printf("remove a todo\n");
             break;
         case LIST:
             printf("list todos\n");
             break;
     }
+
+    // Close database
+    closeDatabase(&tc);
 
     return 0;
 }
