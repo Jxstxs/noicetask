@@ -65,6 +65,8 @@ void initDatabase(taskConf *tc) {
                 printf("\n");
                 i++;
             }
+            // when no database was created 
+            exit(1);
         } else {
 
             // if database was found, open it
