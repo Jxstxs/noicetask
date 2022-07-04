@@ -13,10 +13,10 @@ enum ERRS {
 };
 
 enum FUNCS {
-    ADD_TODO,
-    MOD_TODO,
-    REMOVE_TODO,
-    DONE_TODO,
+    ADD_TASK,
+    MOD_TASK,
+    REMOVE_TASK,
+    DONE_TASK,
     LIST,
     ANY,
     NONE
@@ -49,6 +49,6 @@ typedef struct {
     int noConfirm;
     int err;
     int func;
-} todoConf;
+} taskConf;
 
 #endif // MAIN_H

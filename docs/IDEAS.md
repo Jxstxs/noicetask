@@ -1,8 +1,8 @@
 # NOICETASK
 
-## The todo
+## The Task
 
-The todo has a Title, a Description, a Path, a Date when it was created, a Expire Date when it should be done, a Category, a Priority (from 1-3)
+The Task has a Title, a Description, a Path, a Date when it was created, a Expire Date when it should be done, a Category, a Priority (from 1-3)
 
 ## Categories
 
@@ -18,30 +18,31 @@ Format: "YYYY/MM/DD/HH/MM", where the last MM is for minute and is optional and 
 
 ## Functions
 
-- [ ]  add Todos: Adds an Todo with the given Options to the Database
-    * -t/--title: the Title for the Todo (needed) => takes one String (maybe 90 Chars)
-    * -d/--description: the Description body of the Todo (optional) => takes a String (no limitation)
-    * -pa/--path: the Path or File a todo is "linked" to (optional) => takes a String (gets checked)
+
+- [ ]  add Tasks: Adds an Task with the given Options to the Database
+    * -t/--title: the Title for the Task (needed) => takes one String (maybe 90 Chars)
+    * -d/--descripton: the Description body of the Task (optional) => takes a String (no limitation)
+    * -pa/--path: the Path or File a Task is "linked" to (optional) => takes a String (gets checked)
     * -ex/--expire: the Date to when it needs to be done (optional) => takes a string (get converted to a timestamp)
-    * -ca/--category: the Categories the Todo belongs to (optional) => takes one String (gets checked, if not found create it??)
-    * -pr/--priority: the Priority for the Todo (optional -> default: 1) => takes a Int (1-3)
+    * -ca/--category: the Categories the Task belongs to (optional) => takes one String (gets checked, if not found create it??)
+    * -pr/--priority: the Priority for the Task (optional -> default: 1) => takes a Int (1-3)
 
-- [ ]  done Todos: toggles the Done Status of a Todo
-    * -id: the id of the todo, which will be marked as done (needed) => takes one to n arguments (int)
-    * (-ch/--choose: opens fzf with all todos which are not done => takes no arguments)
+- [ ]  done Tasks: toggles the Done Status of a Task
+    * -id: the id of the Task, which will be marked as done (needed) => takes one to n arguments (int)
+    * (-ch/--choose: opens fzf with all Tasks which are not done => takes no arguments)
 
-- [ ] mod Todos: modifies a Todo with the given Option and New Value
-    * -id: the id of the Todo, which will be modified (needed) => takes one (to n) argument (int)
+- [ ] mod Tasks: modifies a Task with the given Option and New Value
+    * -id: the id of the Task, which will be modified (needed) => takes one (to n) argument (int)
     * -f/--field: the Option, which will be changed (needed) => takes one String
-    * -nv/--newvalue: the New Value, which will be set for Option in Todo (needed) => takes one String (maybe need splitting for this, see categories)
+    * -nv/--newvalue: the New Value, which will be set for Option in Task (needed) => takes one String (maybe need splitting for this, see categories)
 
-- [ ] remove Todos: removes a Todo from the Database
-    * -id: the id of the Todo, which will be removed (optional) => takes one to n arguments (int)
-    * -m/--marked: removes all Todos, which are marked as Done (optional) => takes no arguments
+- [ ] remove Tasks: removes a Task from the Database
+    * -id: the id of the Task, which will be removed (optional) => takes one to n arguments (int)
+    * -m/--marked: removes all Tasks, which are marked as Done (optional) => takes no arguments
     * => one of them is needed!
 
-- [ ] list: prints the given Database Table to screen in a Table (Todos, Categoires, Paths) => default is Todos
-    * -t/--type: set the type of the output (optional -> default: todos) => takes a string (todo, category, path)
+- [ ] list: prints the given Database Table to screen in a Table (Tasks, Categoires, Paths) => default is Tasks
+    * -t/--type: set the type of the output (optional -> default: Tasks) => takes a string (Task, category, path)
     * (maybe implementing search function -sf and -sv (searchfiled and value))
 
 - [ ] add Category: adds an Category to the Database
@@ -53,7 +54,7 @@ Format: "YYYY/MM/DD/HH/MM", where the last MM is for minute and is optional and 
     * -f/--field: the field, which will get changed (needed) => takes a string
     * -nv/--newvalue: the new value, which will be set for Field in Category (needed) => takes a string
 
-- [ ] remove Category: removes a Category from the Database (maybe need to remove links in the todo database)
+- [ ] remove Category: removes a Category from the Database (maybe need to remove links in the Task database)
     * -id: the id of the Category, which gets removed (needed) => takes a int
 
 - [ ] go to Todo path/open file in $EDITOR
