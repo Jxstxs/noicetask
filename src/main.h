@@ -22,6 +22,12 @@ enum FUNCS {
     NONE
 };
 
+enum PRIORITY {
+    LOW,
+    MEDIUM,
+    HIGH
+};
+
 typedef struct {
     char *title;
     char *description;

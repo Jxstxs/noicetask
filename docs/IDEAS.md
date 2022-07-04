@@ -6,13 +6,18 @@ The Task has a Title, a Description, a Path, a Date when it was created, a Expir
 
 ## Categories
 
-It has a Title, maybe a Description (what it is for) and maybe a default Priority
+It has a Title, maybe a Description (what it is for) and maybe a default Priority. Are Comma separated ("1,2,3,4,5,6,7")
 
 ## Priority
 
 It goes from one to three, or from Low to Mid to High
 
+## Expire Date 
+
+Format: "YYYY/MM/DD/HH/MM", where the last MM is for minute and is optional and gets set to 0
+
 ## Functions
+
 
 - [ ]  add Tasks: Adds an Task with the given Options to the Database
     * -t/--title: the Title for the Task (needed) => takes one String (maybe 90 Chars)
@@ -51,3 +56,6 @@ It goes from one to three, or from Low to Mid to High
 
 - [ ] remove Category: removes a Category from the Database (maybe need to remove links in the Task database)
     * -id: the id of the Category, which gets removed (needed) => takes a int
+
+- [ ] go to Todo path/open file in $EDITOR
+    * -id: the id of the Todo to open the path

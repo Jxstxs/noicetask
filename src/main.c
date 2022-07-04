@@ -8,6 +8,7 @@
 #include "main.h"
 #include "argparse.h"
 #include "database.h"
+#include "addtodo.h"
 
 void usage() {
     printf(
@@ -51,7 +52,7 @@ int main(int argc, char **argv) {
     // Execute Function
     switch (tc.func) {
         case ADD_TASK:
-            printf("adding a todo\n%s\n", tc.fp.title);
+            addTodo(&tc);
             printResults(&tc, "SELECT * FROM task");
             break;
         case DONE_TASK:

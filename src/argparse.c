@@ -1,11 +1,13 @@
 
 #include <sqlite3.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
 #include "main.h"
 #include "argparse.h"
+#include "additional.h"
 
 void initTaskConf(taskConf *tc) {
     tc->databasePath = "";
@@ -43,7 +45,7 @@ taskConf parseArguments(int argc, char** argv){
             skip = 0;
         }
         if (!argv[i]) break;
-
+        
         // ARGUMENTS
         // DATABASE ARG
         if (ARGCMP("-db", "--database", NONE)){
