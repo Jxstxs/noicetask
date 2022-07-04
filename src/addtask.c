@@ -73,11 +73,12 @@ void addTask(taskConf *tc) {
         NOTE: here we are
         Need to be done:
             - check if path is already in database if not add it
-            - check if expireDate is valid (maybe inside of convertStringToDate())
-            - check if categories are valid (maybe inside of parseCategories())
-                - if not valid, print error message and return or create the categories
+            - check if expireDate is valid
+            - check if categories are valid
             - add data to database
     */
+
+    
 
     // check if categories are given
     if (categories != NULL) {
