@@ -5,8 +5,11 @@
 
 #define DATABASENAME "TODO"
 
-void initDatabase(todoConf *tc);
-void closeDatabase(todoConf *tc);
-void createTables(todoConf *tc);
+void initDatabase(taskConf *tc);
+void closeDatabase(taskConf *tc);
+void createTables(taskConf *tc);
+void executeQuery(taskConf *tc, char *query);
+void printResults(taskConf *tc, char *query);
+int callback(void *NotUsed, int argc, char **argv, char **azColName);
 
 #endif // !DATABASE_H
