@@ -5,19 +5,19 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "addtodo.h"
+#include "addtask.h"
 #include "additional.h"
 
-void addTodo(todoConf *tc) {
+void addTask(taskConf *tc) {
     // check if tc is NULL
     if (tc == NULL) {
-        printf("Error: addTodo() called with NULL todoConf\n");
+        printf("Error: addTask() called with NULL TaskConf\n");
         return;
     }
 
     // check if all function parameter are valid
     if (strcmp(tc->fp.title, "") == 0) {
-        printf("To add an Todo you need to specify a title\n");
+        printf("To add an Task you need to specify a title\n");
         return;
     }
 
@@ -29,7 +29,7 @@ void addTodo(todoConf *tc) {
         // free(tc->fp.path);
         tc->fp.path = strdup(newPath);
         if (tc->fp.path == NULL) {
-            printf("Error: addTodo() could not allocate memory for path\n");
+            printf("Error: addTask() could not allocate memory for path\n");
             return;
         }
     }
@@ -40,7 +40,7 @@ void addTodo(todoConf *tc) {
         // convert a string date to a time_t
         expireDate = convertStringToDate(tc->fp.expireDate);
         if (expireDate == -1) {
-            printf("Error: addTodo() could not convert given date to time_t struct\n");
+            printf("Error: addTask() could not convert given date to time_t struct\n");
             return;
         }
     }
@@ -51,7 +51,7 @@ void addTodo(todoConf *tc) {
         // convert a string categories to an int array
         categories = parseCategories(tc->fp.categories);
         if (categories == NULL) {
-            printf("Error: addTodo() could not parse given categories\n");
+            printf("Error: addTask() could not parse given categories\n");
             return;
         }
     }
@@ -62,7 +62,7 @@ void addTodo(todoConf *tc) {
         // convert a string priority to an int
         priority = parsePriority(tc->fp.priority);
         if (priority == -1) {
-            printf("Error: addTodo() could not parse given priority\n");
+            printf("Error: addTask() could not parse given priority\n");
             return;
         }
     } else {

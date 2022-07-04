@@ -3,6 +3,6 @@
 
 #include "main.h"
 
-void addTodo(todoConf *tc);
+void addTask(taskConf *tc);
 
 #endif // ADDTODO_H
