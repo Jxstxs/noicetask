@@ -109,3 +109,13 @@ int parsePriority(char *priority) {
         return -1;
     }
 }
+
+int checkTagsExists(taskConf *tc, int **tags) {
+
+    return 0;
+}
+
+int checkPathExists(taskConf *tc, char *path){
+
+    return 0;
+}

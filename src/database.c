@@ -157,19 +157,3 @@ int callback(void *NotUsed, int argc, char **argv, char **azColName) {
    return 0;
 }
 
-int **getCategories(taskConf *tc) {
-    // function which gets all categories from database 
-    int rc;
-    int **categories = NULL;
-    sqlite3_stmt *stmt;
-
-    rc = sqlite3_prepare_v2(tc->db, "SELECT id FROM tag;", -1, &stmt, NULL);
-    if (rc != SQLITE_OK) {
-        printf("SQL error: %s\n", sqlite3_errmsg(tc->db));
-        sqlite3_close(tc->db);
-        exit(1);
-    }
-
-    // https://stackoverflow.com/questions/23176734/sqlite-c-query-rows-how-to-handle-multiple-columns
-    return categories;
-}
