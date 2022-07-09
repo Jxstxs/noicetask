@@ -51,4 +51,7 @@ test-argparse: tests/argparse-test.c src/argparse.c tests/printConf.c bindir
 test-additional: tests/additional-tests.c src/additional.c bindir
 	$(CC) $(CFLAGS) tests/additional-tests.c src/additional.c -o $(BINDIR)/additional-test
 
+test-db-result: tests/database-result-test.c src/database.c bindir
+	$(CC) $(CFLAGS) tests/database-result-test.c src/database.c $(CLIBS) -o $(BINDIR)/db-result-test
+
 tests: test-argparse
