@@ -136,24 +136,25 @@ void executeQuery(taskConf *tc, char *query) {
     }
 }
 
-void printResults(taskConf *tc, char *query) {
-    int rc;
-    char *errmsg;
-    rc = sqlite3_exec(tc->db, query, callback, NULL, &errmsg);
-    if (rc != SQLITE_OK) {
-        printf("SQL error: %s\n", errmsg);
-        sqlite3_free(errmsg);
-        sqlite3_close(tc->db);
-        exit(1);
-    }
-}
+// void printResults(taskConf *tc, char *query) {
+//     int rc;
+//     char *errmsg;
+//     rc = sqlite3_exec(tc->db, query, callback, NULL, &errmsg);
+//     if (rc != SQLITE_OK) {
+//         printf("SQL error: %s\n", errmsg);
+//         sqlite3_free(errmsg);
+//         sqlite3_close(tc->db);
+//         exit(1);
+//     }
+// }
+//
+// int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+//    int i;
+//    for(i = 0; i<argc; i++) {
+//       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+//    }
+//    printf("\n");
+//    return 0;
+// }
 
-int callback(void *NotUsed, int argc, char **argv, char **azColName) {
-   int i;
-   for(i = 0; i<argc; i++) {
-      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-   }
-   printf("\n");
-   return 0;
 }
-
