@@ -12,7 +12,7 @@ int parsePriority(char *priority);
 
 // checks for database data
 // https://stackoverflow.com/questions/23176734/sqlite-c-query-rows-how-to-handle-multiple-columns
-int checkTagsExists(taskConf *tc, int **tags);
+int checkTagsExists(taskConf *tc, int *tags);
 int checkPathExists(taskConf *tc, char *path);
 
 #endif // ADDITIONAL_H

@@ -110,7 +110,7 @@ int parsePriority(char *priority) {
     }
 }
 
-int checkTagsExists(taskConf *tc, int **tags) {
+int checkTagsExists(taskConf *tc, int *tags) {
 
     return 0;
 }
