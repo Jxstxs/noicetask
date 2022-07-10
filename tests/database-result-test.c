@@ -3,7 +3,7 @@
 
 int main (int argc, char *argv[])
 {
-    DataBaseResult dbr;
+    
     DataBaseQuery dbq;
 
     dbq.distinct = false;
@@ -12,7 +12,7 @@ int main (int argc, char *argv[])
     dbq.where = "";
     dbq.order = "";
 
-     dbr = getDbResults(NULL, dbq);
+    DataBaseResult *dbr1 = getDbResults(NULL, dbq);
 
     dbq.distinct = true;
     dbq.tables = "tags as tg ";
@@ -20,7 +20,7 @@ int main (int argc, char *argv[])
     dbq.where = "WHERE ID=1 ";
     dbq.order = "DESC";
 
-     dbr = getDbResults(NULL, dbq);
+    DataBaseResult *dbr2 = getDbResults(NULL, dbq);
 
     return 0;
 }

@@ -7,6 +7,7 @@
 
 #include "addtask.h"
 #include "additional.h"
+#include "database.h"
 
 void addTask(taskConf *tc) {
     // check if tc is NULL
@@ -78,7 +79,15 @@ void addTask(taskConf *tc) {
             - add data to database
     */
 
-    
+    // check if path is already in database if not add it 
+    DataBaseQuery dbq;
+    dbq.distinct = false;
+    dbq.columns = "path";
+    dbq.tables = "path";
+    // formated string in dbq.where 
+    dbq.where = 
+    dbq.order = "";
+
 
     // check if categories are given
     if (categories != NULL) {
@@ -88,4 +97,7 @@ void addTask(taskConf *tc) {
         }
         free(categories);
     }
+
+    // check if database result is empty
+    // freeDbResults(dbr);
 }

@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "main.h"
 #include "database.h"
 
 void initDatabase(taskConf *tc) {
@@ -157,4 +158,118 @@ void executeQuery(taskConf *tc, char *query) {
 //    return 0;
 // }
 
+void initDbResult(DataBaseResult *dbr) {
+    dbr->title = NULL;
+    dbr->description = NULL;
+    dbr->path = NULL;
+    dbr->date = NULL;
+    dbr->expireDate = NULL;
+    dbr->tagName = NULL;
 }
+
+DataBaseResult *getDbResults(taskConf *tc, DataBaseQuery dbq) {
+    DataBaseResult *dbr = NULL;
+    int rc;
+    char sql[SQL_SIZE];
+    sqlite3_stmt *stmt;
+
+    snprintf(sql, SQL_SIZE, "%sSELECT %s FROM %s%s%s;",
+             (dbq.distinct ? "DISTINCT " : ""),
+             dbq.columns,
+             dbq.tables,
+             dbq.where,
+             dbq.order
+    );
+
+    printf("%s\n", sql);
+
+    rc = sqlite3_prepare_v2(tc->db, sql, -1, &stmt, 0);
+    if (rc != SQLITE_OK) {
+        printf("!SQL ERROR: %s\n", sqlite3_errmsg(tc->db));
+        closeDatabase(tc);
+        exit(1);
+    }
+
+    int count = 0;
+    int columnCount;
+    char *columnName;
+    while (sqlite3_step(stmt) == SQLITE_ROW) {
+        // realloc memory for dbr 
+        DataBaseResult *dbrRealloc = realloc(dbr, sizeof(DataBaseResult) * (count + 1));
+        if (dbrRealloc == NULL) {
+            printf("!ERROR: realloc failed\n");
+            closeDatabase(tc);
+            exit(1);
+        }
+        dbr = dbrRealloc;
+
+        // get data from row
+        columnCount = sqlite3_column_count(stmt);
+        initDbResult(&dbr[count]);
+        for (int i = 0; i < columnCount; i++) {
+            columnName = strdup(sqlite3_column_name(stmt, i));
+            if (strcmp(columnName, "id") == 0) {
+                dbr[count].id = sqlite3_column_int(stmt, i);
+            } else if (strcmp(columnName, "title") == 0) {
+                dbr[count].title = strdup((const char *)sqlite3_column_text(stmt, i));
+            } else if (strcmp(columnName, "description") == 0) {
+                dbr[count].description = strdup((const char *)sqlite3_column_text(stmt, i));
+            } else if (strcmp(columnName, "path") == 0) {
+                dbr[count].path = strdup((const char *)sqlite3_column_text(stmt, i));
+            } else if (strcmp(columnName, "done") == 0) {
+                dbr[count].done = sqlite3_column_int(stmt, i);
+            } else if (strcmp(columnName, "date") == 0) {
+                dbr[count].date = strdup((const char *)sqlite3_column_text(stmt, i));
+            } else if (strcmp(columnName, "expireDate") == 0) {
+                dbr[count].expireDate = strdup((const char *)sqlite3_column_text(stmt, i));
+            } else if (strcmp(columnName, "priority") == 0) {
+                dbr[count].priority = sqlite3_column_int(stmt, i);
+            } else if (strcmp(columnName, "tag") == 0) {
+                dbr[count].tagName = strdup((const char *)sqlite3_column_text(stmt, i));
+            }
+        }
+
+        count++;
+    }
+
+    // realloc memory for dbr 
+    DataBaseResult *dbrRealloc = realloc(dbr, sizeof(DataBaseResult) * (count + 1));
+    if (dbrRealloc == NULL) {
+        printf("!ERROR: realloc failed\n");
+        closeDatabase(tc);
+        exit(1);
+    }
+    dbr = dbrRealloc;
+    dbr[count].id = -1;
+
+    return dbr;
+}
+
+void freeDbResults(DataBaseResult *dbr) {
+    if (dbr == NULL) {
+        return;
+    }
+    for (int i = 0; dbr[i].id == -1; i++) {
+        if (dbr[i].title != NULL) {
+            free(dbr[i].title);
+        }
+        if (dbr[i].description != NULL) {
+            free(dbr[i].description);
+        }
+        if (dbr[i].path != NULL) {
+            free(dbr[i].path);
+        }
+        if (dbr[i].date != NULL) {
+            free(dbr[i].date);
+        }
+        if (dbr[i].expireDate != NULL) {
+            free(dbr[i].expireDate);
+        }
+        if (dbr[i].tagName != NULL) {
+            free(dbr[i].tagName);
+        }
+    }
+    free(dbr);
+}
+
+void printResults(DataBaseResult dbr);
